@@ -24,7 +24,7 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("ulquiorrashif-chatfrontend-5665.twc1.net");
+        config.addAllowedOrigin("https://ulquiorrashif-chatfrontend-5665.twc1.net");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,
