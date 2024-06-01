@@ -28,27 +28,11 @@ public class SecurityConf {
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthProvider userAuthProvider;
 
-    //    @Bean
-//    public SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(e->e.disable())
-//                .authorizeHttpRequests(request->request.requestMatchers(antMatcher("/static/style.css"),
-//                        antMatcher("/api/users/get"),antMatcher("/api/users/create"),antMatcher("/api/users/create/{id}"),
-//                        antMatcher("/regPage")).permitAll().anyRequest().authenticated())
-//                .formLogin((form) -> form
-//                        .loginPage("/loginPage")
-//                        .defaultSuccessUrl("/home",true)
-//                        .passwordParameter("password")
-//                        .usernameParameter("email")
-//                        .permitAll()
-//                )
-//                .logout((logout) -> logout.permitAll());
-//        return httpSecurity.build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.exceptionHandling(customizer -> customizer.authenticationEntryPoint(userAuthenticationEntryPoint))
-//                .cors(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JWTAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -58,7 +42,6 @@ public class SecurityConf {
                         .anyRequest().authenticated();
                 })
                 ;
-//        ТЫ УБРАД ПРУТЬ ЛОГИНА !!!!!!
         return httpSecurity.build();
     }
 
